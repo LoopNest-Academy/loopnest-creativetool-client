@@ -209,14 +209,19 @@ const BulkMailer = () => {
 
         <strong>Email Body:</strong>
         <div
-          className="rendered-output"
-          style={{
-            marginTop: "20px",
-            padding: "10px",
-            background: "#f7f7f7",
-            color: "black",
-          }}
-          dangerouslySetInnerHTML={{ __html: emailBody }}
+        // className="rendered-output"
+        // style={{
+        //   marginTop: "20px",
+        //   padding: "10px",
+        //   background: "#f7f7f7",
+        //   color: "black",
+        // }}
+        // dangerouslySetInnerHTML={{ __html: emailBody }}
+        />
+        <iframe
+          title="Email Preview"
+          style={{ width: "100%", height: "600px", border: "1px solid #ccc" }}
+          srcDoc={emailBody}
         />
       </div>
     </div>
