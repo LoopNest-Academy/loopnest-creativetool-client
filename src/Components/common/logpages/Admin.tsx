@@ -41,7 +41,7 @@ const Admin = () => {
         className="input weex-input"
         type="text"
         style={{ height: "40px", width: "600px" }}
-        placeholder="Toolkit Admin Name"
+        placeholder="Toolkit Admin Key"
         onChange={(e) => setModerator(e.target.value)}
       />
 
