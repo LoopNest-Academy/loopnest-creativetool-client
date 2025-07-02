@@ -21,7 +21,11 @@ const Home = () => {
         alt=""
       />
 
-      <h1 className="text-4xl">ToolKit</h1>
+      <h1 className="text-4xl">Creative-toolKit — @ettisafxrup</h1>
+      <strong>
+        {localStorage.getItem("moderator")} - {localStorage.getItem("role")},
+        LoopNest
+      </strong>
     </div>
   )
 }

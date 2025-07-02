@@ -1,25 +1,32 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const Admin = () => {
   const [moderator, setModerator] = useState("")
   const navigate = useNavigate()
   const userJoinedTime: Date = new Date()
 
-  const submitInstitution = (e: { preventDefault: () => void }) => {
+  const submitInstitution = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    localStorage.setItem("moderator", moderator)
-    localStorage.setItem(
-      "joinDate",
-      userJoinedTime.toLocaleDateString() +
-        " " +
-        userJoinedTime.toLocaleTimeString()
-    )
+    const response = await axios.post(import.meta.env.VITE_API + "/api/login", {
+      email: moderator,
+    })
 
-    if (moderator !== "") {
+    const { auth, name, role } = response.data
+    if (auth) {
+      localStorage.setItem("moderator", name)
+      localStorage.setItem("role", role)
+
+      localStorage.setItem(
+        "joinDate",
+        userJoinedTime.toLocaleDateString() +
+          " " +
+          userJoinedTime.toLocaleTimeString()
+      )
       navigate("/home")
     } else {
-      setModerator("LoopNest_Admin")
+      alert("Wrong data!")
     }
   }
 

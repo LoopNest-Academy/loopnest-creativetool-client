@@ -93,14 +93,18 @@ const BulkMailer = () => {
       }
 
       const response = await axios.post(
-        "http://127.0.0.1:4000/api/mailer",
+        import.meta.env.VITE_API + "/api/mailer",
         payload
       )
       console.log("Email sent successfully:", response.data)
       alert("Email sent successfully!")
-    } catch (error) {
-      console.error("Error sending email:", error)
-      alert("Failed to send email.")
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } }
+      alert(
+        `Failed to send email. ${
+          err.response?.data?.message ?? "an unknown error occurred."
+        }`
+      )
     }
   }
 
@@ -193,7 +197,7 @@ const BulkMailer = () => {
                 padding: "10px", // ✅ optional: better text spacing
                 resize: "none", // optional: disable resize
               }}
-              placeholder="__ Email Body goes Here"
+              placeholder="   Email Template"
               value={emailBody}
               onChange={(e) => setEmailBody(e.target.value)}
             />
